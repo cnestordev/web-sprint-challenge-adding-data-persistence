@@ -17,8 +17,8 @@ router.get('/:id', (req, res) => {
 router.post('/:id', (req, res) => {
     const id = Number(req.params.id)
     addResourceToProject(id, req.body)
-        .then(resp => {
-            console.log(resp)
+        .then(id => {
+            res.status(201).json({ data: id })
         })
         .catch(error => {
             res.status(500).json({ message: error.message })
