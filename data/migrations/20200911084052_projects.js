@@ -11,6 +11,7 @@ exports.up = function (knex) {
         tbl.string('description')
     }).createTable('task', tbl => {
         tbl.increments()
+        tbl.integer('task_id').references('id').inTable('project').notNull().onDelete('CASCADE').onUpdate('CASCADE')
         tbl.string('description').notNull()
         tbl.string('notes')
         tbl.boolean('complete').defaultTo(0)
