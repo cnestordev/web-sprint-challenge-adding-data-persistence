@@ -2,29 +2,29 @@ const express = require('express')
 
 const router = express.Router()
 
-const { findProjects, addProject } = require('./projects-model')
+const db = require('../data/db-config')
 
-//GET all projects
+const { findResource, addResource } = require('./resources-model')
+
+//GET all resources
 router.get('/', (req, res) => {
-    findProjects()
-        .then(projects => {
-            res.status(200).json({ data: projects })
+    findResource()
+        .then(resources => {
+            res.status(200).json({ data: resources })
         })
         .catch(error => {
             res.status(500).json({ error: error.message })
         })
 })
 
-//POST new project
 router.post('/', (req, res) => {
-    addProject(req.body)
+    addResource(req.body)
         .then(id => {
-            res.status(201).json({ message: `successfully added new project with id of ${id}` })
+            res.status(201).json({ message: `succesfully added resource with id ${id}` })
         })
         .catch(error => {
             res.status(500).json({ error: error.message })
         })
 })
-
 
 module.exports = router
